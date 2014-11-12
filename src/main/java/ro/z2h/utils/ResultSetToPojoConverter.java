@@ -43,7 +43,7 @@ public class ResultSetToPojoConverter {
             employee.setHireDate(rs.getDate("hire_date"));
             employee.setJob(job);
             employee.setSalary(rs.getDouble("salary"));
-            employee.setCommissionPoints(rs.getDouble("commission_pct"));
+            employee.setCommissionPoints(rs.getDouble("comission_pct"));
             employee.setManager(manager);
             employee.setDepartment(department);
 
@@ -71,7 +71,7 @@ public class ResultSetToPojoConverter {
                employeeView.setHireDate(rs.getDate("hire_date"));
                employeeView.setJob(jobs);
                employeeView.setSalary(rs.getDouble("salary"));
-               employeeView.setCommissionPoints(rs.getDouble("commission_pct"));
+               employeeView.setCommissionPoints(rs.getDouble("comission_pct"));
                employeeView.setManager(managers);
                employeeView.setDepartment(departments);
 
