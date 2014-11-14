@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface DepartmentService {
     public List<Department> findAllDepartments();
-    public Department findOneDepartment();
+    public Department findOneDepartment(Long Id);
 }

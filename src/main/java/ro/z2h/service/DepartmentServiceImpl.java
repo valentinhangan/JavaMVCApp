@@ -29,13 +29,13 @@ public class DepartmentServiceImpl implements DepartmentService{
         return departmentslist;
     }
 
-    public Department findOneDepartment(){
+    public Department findOneDepartment(Long Id){
         List<Department> departmentslist = new ArrayList<Department>();
         DepartmentDao dep = new DepartmentDao();
         Department d = new Department();
         Connection con = DatabaseManager.getConnection("ZTH_09","passw0rd");
         try {
-            d = dep.getDepartmentById(con, 100l);
+            d = dep.getDepartmentById(con, Id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

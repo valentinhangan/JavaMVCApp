@@ -26,13 +26,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeelist;
     }
 
-    public Employee findOneEmployee(){
+    public Employee findOneEmployee(Long Id){
         List<Employee> employeelist = new ArrayList<Employee>();
         EmployeeDao empl = new EmployeeDao();
         Employee em = new Employee();
         Connection con = DatabaseManager.getConnection("ZTH_09","passw0rd");
         try {
-             em = empl.getEmployeeById(con, 100l);
+             em = empl.getEmployeeById(con, Id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

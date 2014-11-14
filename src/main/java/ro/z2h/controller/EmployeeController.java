@@ -24,10 +24,10 @@ public class EmployeeController {
         return employees;
    }
     @MyRequestMethod(urlPath = "/one")
-    public Employee getOneEmployee(){
+    public Employee getOneEmployee(String Id){
         Employee e = new Employee();
         EmployeeServiceImpl empl = new EmployeeServiceImpl();
-        e = empl.findOneEmployee();
+        e = empl.findOneEmployee(Long.valueOf(Id));
         return e;
     }
 

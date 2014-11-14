@@ -25,10 +25,10 @@ public class DepartmentController {
     }
 
     @MyRequestMethod(urlPath = "/one")
-    public Department getOneDepartment(){
+    public Department getOneDepartment(Long Id){
         Department d = new Department();
         DepartmentServiceImpl dep = new DepartmentServiceImpl();
-        d = dep.findOneDepartment();
+        d = dep.findOneDepartment(Id);
         return d;
     }
     }

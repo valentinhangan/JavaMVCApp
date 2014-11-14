@@ -18,7 +18,8 @@ import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.lang.reflect.Parameter;
+import java.util.*;
 
 /**
  * Created by hangan on 11/11/2014.
@@ -57,6 +58,7 @@ public class MyDispatcherServlet extends HttpServlet {
                            methodAttributes.setControllerClass(aClass.getName());
                            methodAttributes.setMethodType(meth.methodType());
                            methodAttributes.setMethodName(method.getName());
+                           methodAttributes.setMethodParameterTypes(method.getParameterTypes());
 
                            annotationMap.put(key,methodAttributes);
 
@@ -94,15 +96,30 @@ public class MyDispatcherServlet extends HttpServlet {
         /*pt  /test = Hello*/
         /*pt /employee => all Employees de la Application Controller*/
         String pathInfo = req.getPathInfo();
+        req.getParameterMap();
         MethodAttributes methodAttributes=annotationMap.get(pathInfo);
+
 
 
         try {
             if(methodAttributes !=null){
                 Class<?> appControllerClass = Class.forName(methodAttributes.getControllerClass());
                 Object appControllerInstance = appControllerClass.newInstance();
-                Method controllerMethod = appControllerClass.getMethod(methodAttributes.getMethodName());
-                return controllerMethod.invoke(appControllerInstance);
+                Method controllerMethod = appControllerClass.getMethod(methodAttributes.getMethodName(),methodAttributes.getMethodParameterTypes());
+                //pregatire parametri apel
+                Parameter[] parameters = controllerMethod.getParameters();
+                List<String> methodParamsValue = new ArrayList<String>();
+
+                for (Parameter parameter : parameters) {
+                    Class<?> realParamType = parameter.getType();
+                    String param = req.getParameter(parameter.getName());
+                    methodParamsValue.add(param);
+
+
+                }
+                Object response = controllerMethod.invoke(appControllerInstance,(String[]) methodParamsValue.toArray(new String[0]));
+
+                return response;
             }
 
         } catch (ClassNotFoundException e) {
